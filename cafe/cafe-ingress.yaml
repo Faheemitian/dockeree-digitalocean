@@ -5,17 +5,23 @@ metadata:
 spec:
   tls:
   - hosts:
-    - cafe.example.com
+    - cafe.apps.devops.vertigo.com.br
+    secretName: cafe-secret
+  - hosts:
+    - tea.apps.devops.vertigo.com.br
     secretName: cafe-secret
   rules:
-  - host: cafe.example.com
+  - host: tea.apps.devops.vertigo.com.br
     http:
       paths:
-      - path: /tea
+      - path: /
         backend:
           serviceName: tea-svc
           servicePort: 80
-      - path: /coffee
+  - host: cafe.apps.devops.vertigo.com.br
+    http:
+      paths:
+      - path: /
         backend:
           serviceName: coffee-svc
           servicePort: 80

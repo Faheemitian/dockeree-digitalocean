@@ -13,4 +13,5 @@ ansible-hosts
 docker_subscription.lic
 ucp-bundle/
 digitalocean-secret.yml
+cafe-secret.yaml
 
