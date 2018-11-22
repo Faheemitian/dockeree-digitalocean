@@ -1,0 +1,27 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: cafe-ingress
+spec:
+  tls:
+  - hosts:
+    - cafe.apps.DOMAIN
+    secretName: cafe-secret
+  - hosts:
+    - tea.apps.DOMAIN
+    secretName: cafe-secret
+  rules:
+  - host: tea.apps.DOMAIN
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: tea-svc
+          servicePort: 80
+  - host: cafe.apps.DOMAIN
+    http:
+      paths:
+      - path: /
+        backend:
+          serviceName: coffee-svc
+          servicePort: 80
