@@ -95,6 +95,12 @@ ansible-playbook install-ucp.yml
 
 UCP will be available at https://ucp.devops.mycompany.com
 
+11. Install worker nodes
+
+```sh
+ansible-playbook install-swarm.yml
+```
+
 11. Change orchestrator for worker nodes
 
 12. Create and download client bundle, run "env.sh" script, list nodes
