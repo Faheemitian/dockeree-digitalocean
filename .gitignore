@@ -1,4 +1,5 @@
 babyswarm.auto.tfvars
+backend.tf
 letsencrypt/
 .terraform/
 .vscode/
