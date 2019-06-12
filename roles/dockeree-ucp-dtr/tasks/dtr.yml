@@ -1,0 +1,31 @@
+---
+- name: "Pull DTR image"
+  command: docker pull docker/dtr:{{ dtr_version }}
+  changed_when: false
+
+- name: "Test if DTR already exists"
+  uri:
+    url: "https://localhost:{{ docker_dtr_port }}/_ping"
+    validate_certs: no
+  register: dtr_primary
+  ignore_errors: yes
+
+- name: "DTR args dump"
+  debug:
+    msg: "install --dtr-external-url https://{{ inventory_hostname }} --ucp-node {{ swarm_prefix }}-{{ inventory_hostname_short }} --ucp-username admin --ucp-password {{ docker_ucp_admin_password }} --ucp-url https://{{ groups['managers'][0] }} --ucp-insecure-tls"
+- name: "Install DTR"
+  command: |
+    docker container run --rm --name dtr \
+    docker/dtr:{{ dtr_version }} \
+    install \
+    --dtr-external-url https://{{ inventory_hostname }}  \
+    --ucp-node {{ swarm_prefix }}-{{ inventory_hostname_short  }} \
+    --ucp-username admin \
+    --ucp-password {{ docker_ucp_admin_password }} \
+    --ucp-url https://{{ groups['managers'][0] }}
+    --ucp-insecure-tls
+  when: dtr_primary.status != 200
+
+
+
+# --nfs-storage-url nfs://{{ nfs_server }}{{ images_folder }} 

@@ -1,0 +1,6 @@
+- hosts: dtr
+  tasks:
+    - include_role:
+        name: dockeree-ucp-dtr
+        tasks_from: dtr
+      when: inventory_hostname == groups['dtr'][0]      

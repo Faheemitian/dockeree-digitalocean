@@ -4,14 +4,14 @@ metadata:
   name: cafe-ingress
 spec:
   rules:
-  - host: tea.apps.devops.vertigo.com.br
+  - host: tea.apps.vijuto.com
     http:
       paths:
       - path: /
         backend:
           serviceName: tea-svc
           servicePort: 80
-  - host: cafe.apps.devops.vertigo.com.br
+  - host: cafe.apps.vijuto.com
     http:
       paths:
       - path: /

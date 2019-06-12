@@ -7,9 +7,9 @@
       become: yes
       when: inventory_hostname == groups['managers'][0]
     - include_role:
-        name: dockeree-ucp-primary
+        name: dockeree-ucp-dtr
+        tasks_from: ucp
       vars:
         #docker_ucp_fqdn_san: --san ucp.devops.mycompany.com
         docker_external_cert: --external-server-cert
-      become: yes
       when: inventory_hostname == groups['managers'][0]      

@@ -45,9 +45,9 @@ resource "digitalocean_droplet" "swarm-worker1" {
   tags     = ["${digitalocean_tag.workers.id}"]
 }
 
-resource "digitalocean_droplet" "swarm-worker2" {
+resource "digitalocean_droplet" "swarm-dtr" {
   image    = "${var.do_image}"
-  name     = "${var.swarm-prefix}-worker2"
+  name     = "${var.swarm-prefix}-dtr"
   region   = "nyc3"
   size     = "s-4vcpu-8gb"
   ssh_keys = "${var.ssh_keys}"
@@ -71,13 +71,6 @@ resource "digitalocean_record" "swarm-worker1" {
   value  = "${digitalocean_droplet.swarm-worker1.ipv4_address}"
 }
 
-# Add a record to the domain
-resource "digitalocean_record" "swarm-worker2" {
-  domain = "${digitalocean_domain.swarm-domain.name}"
-  name   = "${var.swarm-prefix}-worker2"
-  type   = "A"
-  value  = "${digitalocean_droplet.swarm-worker2.ipv4_address}"
-}
 
 # Add a record to the domain
 resource "digitalocean_record" "swarm-manager" {
@@ -95,11 +88,19 @@ resource "digitalocean_record" "ucp" {
   value  = "${digitalocean_droplet.swarm-manager.ipv4_address}"
 }
 
-output "ip address swarm manager" {
+# Add a record to the domain
+resource "digitalocean_record" "swarm-dtr" {
+  domain = "${digitalocean_domain.swarm-domain.name}"
+  name   = "dtr"
+  type   = "A"
+  value  = "${digitalocean_droplet.swarm-dtr.ipv4_address}"
+}
+
+output "ip-address-swarm-manager" {
   value = "${digitalocean_droplet.swarm-manager.ipv4_address}"
 }
 
-output "floating ip address swarm manager" {
+output "floating-ip-address-swarm-manager" {
   value = "${digitalocean_floating_ip.swarm-manager.ip_address}"
 }
 

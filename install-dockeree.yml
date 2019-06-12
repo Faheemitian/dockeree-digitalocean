@@ -4,5 +4,5 @@
     - include_role:
         name: dockeree
       vars:
-        docker_ee_url: 'https://storebits.docker.com/ee/centos/sub-a2835aa2-1b74-406e-8134-3d50cbee55e2'
+        docker_ee_url: 'https://storebits.docker.com/ee/centos/sub-af1d3aa3-24b8-4258-b172-c553f65e2ac7'
 

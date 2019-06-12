@@ -2,10 +2,16 @@
 # DOMAIN will be replaced by setdomain.sh script
 #
 
+[all:vars]
+domain_name = "DOMAIN"
+swarm_prefix = "do"
+
 [managers]
-do-manager.DOMAIN ansible_user=root
+ucp.DOMAIN ansible_user=root
+
+[dtr]
+dtr.DOMAIN ansible_user=root
 
 [workers]
 do-worker1.DOMAIN ansible_user=root
-do-worker2.DOMAIN ansible_user=root
 
